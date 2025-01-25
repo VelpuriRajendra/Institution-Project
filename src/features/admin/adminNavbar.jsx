@@ -8,7 +8,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 
 import * as React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { clearLoggedData } from '../user/loginSlice';
 import styled from 'styled-components';
@@ -50,6 +50,9 @@ export default function AdminNavComp() {
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Admin Dashboard
+          </Typography>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <Link to="/" style={{color: "white"}}>Home Page</Link>
           </Typography>
           {auth && (
             <Wrapper>
