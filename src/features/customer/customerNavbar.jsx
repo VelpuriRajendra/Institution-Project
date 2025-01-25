@@ -7,7 +7,10 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 
+import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import styled from 'styled-components';
 
 import { clearLoggedData } from '../user/loginSlice';
 
@@ -45,7 +48,7 @@ export default function CustomerNavComp() {
             Customer Dashboard
           </Typography>
           {auth && (
-            <div>
+            <Wrapper>
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -76,10 +79,13 @@ export default function CustomerNavComp() {
                 <MenuItem onClick={handlePayment}>Make Payment</MenuItem>
                 <MenuItem onClick={handleLogout}>Log Out</MenuItem>
               </Menu>
-            </div>
+            </Wrapper>
           )}
         </Toolbar>
       </AppBar>
     </Box>
   );
 }
+
+const Wrapper = styled.div`
+`;

@@ -7,9 +7,8 @@ import { useFormik } from "formik";
 import {styled} from "styled-components"
 
 
-import { useLazyGetloginQuery } from "../../services/loginSevice.api";
 import { useRegisterToCunstomerMutation } from "../../services/registrationService.api";
-import { useAddCustomerDetailsMutation } from "../../services/signupService.api";
+import { useAddCustomerDetailsMutation, useLazyGetloginQuery } from "../../services/signupService.api";
 
 import { addLoggeduser } from "./loginSlice";
 import HomeNavComp from "../home/homeNavComp";
@@ -44,7 +43,7 @@ const LoginComp = () => {
                 }
             }}) 
         }
-  })
+    })
     return(
         <Wrapper>
             <HomeNavComp />

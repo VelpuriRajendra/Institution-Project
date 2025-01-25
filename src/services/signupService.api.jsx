@@ -7,6 +7,9 @@ const signupApi = createApi({
         getSignup:builde.query({
             query:()=>(`/`)
         }),
+        getlogin:builde.query({
+            query:(data)=>(`/?mobileNumber=${data.mobileNumber}&password=${data.password}&role=${data.role}`)
+        }),
         addRegisterToCustomer:builde.mutation({
             query:(signupDetails)=>({
                 url:"/",
@@ -24,8 +27,8 @@ const signupApi = createApi({
     })
 })
 export const {useAddRegisterToCustomerMutation, 
-     
                 useAddCustomerDetailsMutation,
                 useGetSignupQuery,
-                useLazyGetSignupQuery} = signupApi
+                useLazyGetSignupQuery,
+                useLazyGetloginQuery} = signupApi
 export default signupApi

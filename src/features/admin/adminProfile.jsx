@@ -6,15 +6,16 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 import { useSelector } from "react-redux"
+import styled from 'styled-components';
 
 export default function CustomerProfile() {
 
     const {loggedUser} = useSelector(state=>state.loginRed)
 
   return (
-    <div>
+    <Wrapper>
        { loggedUser.map((details)=>{
-        return <div>
+        return <Wrapper>
             <Card sx={{ maxWidth: 345 }}>
               <CardMedia
                 sx={{ height: 300 }}
@@ -37,8 +38,11 @@ export default function CustomerProfile() {
                 <Button size="small">Learn More</Button>
               </CardActions>
             </Card>
-        </div>
+        </Wrapper>
        })}
-    </div>
+    </Wrapper>
   );
 }
+
+const Wrapper = styled.div`
+`;

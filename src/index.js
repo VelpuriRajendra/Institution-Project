@@ -1,22 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import {RouterProvider, createBrowserRouter} from "react-router-dom"
+import { Provider } from 'react-redux';
+
+import './index.css';
+
 import HomeComp from './features/home/homeComp';
+
 import LoginComp from './features/user/loginComp';
 import SignupComp from './features/user/signupComp';
 import RegistrationComp from './features/user/registrationComp';
-import { Provider } from 'react-redux';
+
 import store from './app/store';
 import CustomerDashboard from './features/customer/customerDashboardComp';
-import AdminDashboard from './features/admin/adminDashboardComp';
-import CustomerPaymentDetails from './features/customer/customerPaymentDetails';
-import Customerpayment from './features/customer/cunstomerPayment';
+import CustomerPaymentComp from './features/customer/cunstomerPayment';
 import CustomerProfile from './features/customer/customerProfile';
+import CustomerPaymentDetails from './features/customer/customerPaymentDetails';
+
 import AddCustomer from './features/admin/addCustomer';
 import ViewCustomers from './features/admin/viewCustomers';
 import ViewRegisters from './features/admin/viewRegisters';
 import AdminProfile from './features/admin/adminProfile';
+import AdminDashboard from './features/admin/adminDashboardComp';
+
 
 const route = createBrowserRouter([{
   path:"/",
@@ -42,7 +48,7 @@ const route = createBrowserRouter([{
     element:<CustomerPaymentDetails />
   },{
     path:"/customerDashboard/payment",
-    element:<Customerpayment/>
+    element:<CustomerPaymentComp/>
   },
   {
     path:"/customerDashboard/customerProfile",

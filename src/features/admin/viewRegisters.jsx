@@ -4,6 +4,8 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
+import styled from 'styled-components';
+
 import { useGetRegistersDetailsQuery} from "../../services/registrationService.api"
 
 const ViewRegisters = () => {
@@ -12,12 +14,12 @@ const ViewRegisters = () => {
     // const [customerFun, customerDetails] = useLazyGetRegistersDetailsQuery()
     console.log(data)
     return(
-        <div>
+        <Wrapper>
             <h1>
             View Customers
             </h1>
             {data?.map((details)=>{
-               return <div>
+               return <Wrapper>
                       <Accordion>
                         <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
@@ -40,10 +42,13 @@ const ViewRegisters = () => {
                         </AccordionDetails>
 
                     </Accordion>
-                    </div>
+                    </Wrapper>
                 })}
-        </div>
+        </Wrapper>
     )
 }
 export default ViewRegisters
+
+const Wrapper = styled.div`
+`;
 

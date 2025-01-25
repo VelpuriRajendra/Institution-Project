@@ -4,7 +4,10 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
+import styled from 'styled-components';
+
 import { useGetSignupQuery } from "../../services/signupService.api";
+
 
 const ViewCustomers = () => {
     const {data} = useGetSignupQuery()
@@ -13,12 +16,12 @@ const ViewCustomers = () => {
         //lazy query will give u the array (in that one function nd 2 objects)
     console.log(data)
     return(
-        <div>
+        <Wrapper>
             <h1>
             View Customers
             </h1>
             {data?.map((details)=>{
-               return <div>
+               return <Wrapper>
                       <Accordion>
                         <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
@@ -43,9 +46,12 @@ const ViewCustomers = () => {
                         Total Fee: {details.fee}
                         </AccordionDetails>
                     </Accordion>
-                    </div>
+                    </Wrapper>
                 })}
-        </div>
+        </Wrapper>
     )
 }
 export default ViewCustomers
+
+const Wrapper = styled.div`
+`;

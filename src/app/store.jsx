@@ -3,7 +3,6 @@ import { setupListeners } from "@reduxjs/toolkit/query";
 
 import registrationApi from "../services/registrationService.api";
 import signupApi from "../services/signupService.api";
-import loginApi from "../services/loginSevice.api";
 
 import LoginReducer from "../features/user/loginSlice";
 
@@ -12,11 +11,10 @@ const store = configureStore({
         loginRed:LoginReducer,
         [registrationApi.reducerPath]: registrationApi.reducer,
         [signupApi.reducerPath]: signupApi.reducer,
-        [loginApi.reducerPath]:loginApi.reducer
+        // [loginApi.reducerPath]:loginApi.reducer
     },
     middleware:(defaultMiddleware)=>defaultMiddleware().concat(registrationApi.middleware, 
                                                                 signupApi.middleware,
-                                                                loginApi.middleware
     )
 })
 setupListeners(store.dispatch)
