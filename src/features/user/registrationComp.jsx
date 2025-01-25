@@ -5,8 +5,7 @@ import { useFormik } from "formik";
 
 import { Box, Button, Grid, TextField } from "@mui/material";
 
-import { useAddRegisterDetailsMutation, 
-    useGetRegistersDetailsQuery, 
+import { useAddRegisterDetailsMutation,
     useLazyGetRegistersDetailsQuery} from "../../services/registrationService.api";
 
 import HomeNavComp from "../home/homeNavComp";
@@ -27,7 +26,8 @@ const RegistrationComp = () => {
             mobileNumber: "",
             mailId: "",
             course: "",
-            fee:""
+            fee:"",
+            role: "Customer"
         },
         onSubmit:(val)=>{
             addRegistrationFun(val)

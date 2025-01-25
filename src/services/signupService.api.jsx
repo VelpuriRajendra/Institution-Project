@@ -15,10 +15,10 @@ const signupApi = createApi({
             })
         }),
         addCustomerDetails:builde.mutation({
-            query:(passwordDetails)=>({
-                url:`?mobileNumber=${passwordDetails.mobileNumber}`,
+            query:(customerDetails)=>({
+                url:"/"+customerDetails?.id,
                 method:"PATCH",
-                body:passwordDetails
+                body:customerDetails
             })
         })  
     })

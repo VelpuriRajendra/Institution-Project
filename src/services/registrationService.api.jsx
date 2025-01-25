@@ -16,7 +16,7 @@ const registrationApi = createApi({
         }),
         registerToCunstomer:builde.mutation({
             query:(customerDetails)=>({
-                url:`/?mobileNumber=${customerDetails.mobileNumber}`,
+                url:`/?mobileNumber=${customerDetails}`,
                 method:"GET"
             })
         })

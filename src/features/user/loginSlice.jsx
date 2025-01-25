@@ -9,8 +9,8 @@ export const LoginSlice = createSlice({
         addLoggeduser:(state, action)=>{
             state.loggedUser.push(action.payload)
         },
-        clearLoggedData:(state)=>{
-            state.loggedUser.length = 0
+        clearLoggedData:(state)=>{ 
+            state.loggedUser = []
         }
     }
 })

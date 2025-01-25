@@ -8,14 +8,16 @@ import {styled} from "styled-components"
 
 
 import { useLazyGetloginQuery } from "../../services/loginSevice.api";
+import { useRegisterToCunstomerMutation } from "../../services/registrationService.api";
+import { useAddCustomerDetailsMutation } from "../../services/signupService.api";
 
 import { addLoggeduser } from "./loginSlice";
 import HomeNavComp from "../home/homeNavComp";
 
-
-
 const LoginComp = () => {
     const [fun] = useLazyGetloginQuery()
+    const [regToCustFun] = useRegisterToCunstomerMutation()
+    const [addCustomer] = useAddCustomerDetailsMutation()
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const userFormik = useFormik({
@@ -26,7 +28,8 @@ const LoginComp = () => {
         },
         onSubmit:(loginDetails)=>{
             console.log("loginDetails",loginDetails)
-            fun(loginDetails).then(res=>{if(res.data.length === 0){
+            fun(loginDetails)
+            .then(res=>{if(res.data.length === 0){
                 console.log("res",res.data[0])
             }else{
                 dispatch(addLoggeduser(res.data[0]))
@@ -35,6 +38,8 @@ const LoginComp = () => {
                     navigate("/adminDashboard")
                 }
                 else{
+                    regToCustFun(res.data[0].mobileNumber)
+                    .then(res=>addCustomer(res.data[0]))
                     navigate("/customerDashboard")
                 }
             }}) 

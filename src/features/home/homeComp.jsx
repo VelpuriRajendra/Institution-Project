@@ -1,11 +1,13 @@
-import * as React from 'react';
 import {  Outlet } from "react-router-dom";
+import { useSelector } from 'react-redux';
 
 import styled from "styled-components";
 
 import HomeNavComp from "./homeNavComp";
 
 const HomeComp = () => {
+    const {loggedUser} = useSelector(state=>state.loginRed)
+    console.log("homeCOmp",loggedUser)
     return(
         <Wrapper style={{backgroundImage:"url('https://wallpapercave.com/wp/wp9040600.jpg')", backgroundSize: "cover", height: "700px"}}>
             <HomeNavComp />

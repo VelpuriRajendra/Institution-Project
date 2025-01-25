@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
-import CustomerNavComp from "./customerNavbar";
 import { Outlet } from "react-router-dom";
+
+import CustomerNavComp from "./customerNavbar";
 
 const CustomerDashboard = () => {
     return(

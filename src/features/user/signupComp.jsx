@@ -14,9 +14,9 @@ import ConfirmModalBox from "./confirmModalBox";
 const SignupComp = () => {
     const [findingSignupInRegister] = useRegisterToCunstomerMutation()
     const [createPassword] = useAddRegisterToCustomerMutation()
-    const [customerDetails] = useAddCustomerDetailsMutation()
 
     const [modalBoxFlag, setModalBoxFlag] = useState(false)
+    const [misMatchErr, setMisMatchErr] = useState()
 
     const successMessage = `Congratulations Your Details Submittted To Our Signup Portal`
     const registrationMessage = `Signup Completed`
@@ -35,11 +35,10 @@ const SignupComp = () => {
                 .then(res=>{if(res.data.length === 0){
                 }else{
                     createPassword(signupDetails)
-                    customerDetails(res.data[0])
                     setModalBoxFlag(true)
                 }})
             }else{
-                alert("mismatch")
+                setMisMatchErr("Password Mis-Matching")
             }
         }
     })
@@ -56,7 +55,9 @@ const SignupComp = () => {
                     <Box component="form" onSubmit={signupFormik.handleSubmit}>
                         <TextField fullWidth label="Enter Your Number/Mail Id" name="mobileNumber" id="fullWidth" onChange={signupFormik.handleChange} required/>
                         <TextField fullWidth label="Create your Password" name="password" id="fullWidth" onChange={signupFormik.handleChange} required/>
+                        <p style={{color: "red"}}>{misMatchErr}</p>
                         <TextField fullWidth label="Re-Enter your Password" name="cnfmPassword" id="fullWidth" onChange={signupFormik.handleChange} required/>
+                        <p style={{color: "red"}}>{misMatchErr}</p>
                         <Button variant="contained" type="submit">Create Your Password</Button>
                     </Box>
                 </Item>
