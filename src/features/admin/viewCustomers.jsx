@@ -6,21 +6,20 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import styled from 'styled-components';
 
-import { useGetSignupQuery } from "../../services/signupService.api";
+import { useGetSignupQuery, useLazyGetSignupQuery } from "../../services/customerService.api";
+import { useGetRegistersDetailsQuery } from '../../services/registrationService.api';
 
 
 const ViewCustomers = () => {
     const {data} = useGetSignupQuery()
-        //initialQuery will give u the object in that we get(current data, data, endpoint name, iserror, isloading, issuccess, timestamp)
-    // const [customerFun, customerDetails] = useLazyGetRegistersDetailsQuery()
-        //lazy query will give u the array (in that one function nd 2 objects)
-    console.log(data)
+    // console.log(data)
     return(
         <Wrapper>
             <h1>
             View Customers
             </h1>
             {data?.map((details)=>{
+                console.log(details)
                return <Wrapper>
                       <Accordion>
                         <AccordionSummary
@@ -28,7 +27,7 @@ const ViewCustomers = () => {
                         aria-controls="panel1-content"
                         id="panel1-header"
                         >
-                        <Typography component="span">{details.fullName}</Typography>
+                        <Typography component="span">{details.fullName? details.fullName: "Not Yet Logged"}</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
                         Mobile Number: {details.mobileNumber}
@@ -44,6 +43,15 @@ const ViewCustomers = () => {
                         </AccordionDetails>
                         <AccordionDetails>
                         Total Fee: {details.fee}
+                        </AccordionDetails>
+                        <AccordionDetails>
+                        Initial Payment: {details.initialPyment ? details.initialPyment:"-"}
+                        </AccordionDetails>
+                        <AccordionDetails>
+                        First Installment: {details.firstInstallment? details.firstInstallment: "-"}
+                        </AccordionDetails>
+                        <AccordionDetails>
+                        Second Installment: {details.secondInstallment? details.secondInstallment: "-"}
                         </AccordionDetails>
                     </Accordion>
                     </Wrapper>

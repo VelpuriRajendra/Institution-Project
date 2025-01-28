@@ -11,6 +11,7 @@ import styled from 'styled-components';
 export default function CustomerProfile() {
 
     const {loggedUser} = useSelector(state=>state.loginRed)
+    // console.log("loggedDdtailsInAdminProfileCOmp",loggedUser )
 
   return (
     <Wrapper>

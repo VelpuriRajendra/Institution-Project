@@ -7,9 +7,9 @@ import HomeNavComp from "./homeNavComp";
 
 const HomeComp = () => {
     const {loggedUser} = useSelector(state=>state.loginRed)
-    console.log("homeCOmp",loggedUser)
+    // console.log("homeCompLoggedUser",loggedUser)
     return(
-        <Wrapper style={{backgroundImage:"url('https://wallpapercave.com/wp/wp9040600.jpg')", backgroundSize: "cover", height: "700px"}}>
+        <Wrapper style={{backgroundImage:"url('https://image.freepik.com/free-vector/educational-institution-homepage-template_82574-11611.jpg')", backgroundSize: "cover", height: "700px"}}>
             <HomeNavComp />
             <Heading1>
                 If Your an Existing Customer Please Login TO Your Account
@@ -28,6 +28,6 @@ export default HomeComp
 const Wrapper = styled.div`
 `;
 const Heading1 = styled.h1`
-color:red
+color:black
 `;
 

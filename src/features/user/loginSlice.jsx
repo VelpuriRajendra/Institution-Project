@@ -7,6 +7,7 @@ export const LoginSlice = createSlice({
     },
     reducers:{
         addLoggeduser:(state, action)=>{
+            // console.log("addLoggedUserAction", action)
             state.loggedUser.push(action.payload)
         },
         clearLoggedData:(state)=>{ 

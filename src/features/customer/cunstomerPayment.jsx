@@ -2,18 +2,33 @@ import { useFormik } from "formik";
 
 import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
+import { useLazyGetSignupQuery, useUpdatePaymentMutation } from "../../services/customerService.api";
+import { addLoggeduser } from "../user/loginSlice";
 
 
-const CUstomerPayment = () => {
+const CustomerPayment = () => {
+    const [updatepaymentDetails] = useUpdatePaymentMutation()
+    const {data} = useLazyGetSignupQuery()
+    console.log(data)
+    const {loggedUser} = useSelector(state=>state.loginRed)
+    const [loggedUserDetails] = loggedUser
+    console.log("loggedUser",loggedUser)
      const customerPaymentFormik = useFormik({
             initialValues:{
                 paymentMode:"",
-                InstallmentNumber: "",
+                installment: "",
                 remark:"",
                 ammount:""
             },
             onSubmit:(details)=>{
-                console.log("loginDetails",details)
+                const {paymentMode,installment,remark,ammount } = details
+            updatepaymentDetails({paymentDetails: {
+                paymentMode: paymentMode,
+                [installment]:ammount,
+                remark: remark  
+            }, id: loggedUserDetails.id}).then(res=>addLoggeduser(res.data))
+            // gettingCustDetails()
             }
         })
     return(
@@ -37,18 +52,19 @@ const CUstomerPayment = () => {
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
-                                name= "InstallmentNumber" 
+                                name= "installment" 
                                 label="Installment number"
                                 onChange={customerPaymentFormik.handleChange}
                                 required>
-                                <MenuItem value="FirstInstallment">First Installment</MenuItem>
-                                <MenuItem value="SecondInstallment">Second Installment</MenuItem>
-                                <MenuItem value="ThirdInstallment">Third Installment</MenuItem>
+                                    {<MenuItem value="initialPayment">Initial Payment</MenuItem>}
+                                    {<MenuItem value="firstInstallment">First Installment</MenuItem>}
+                                    {<MenuItem value="secondInstallment">Second Installment</MenuItem>}
                             </Select>
                             </FormControl>
                             <TextField fullWidth 
                                     label="Remarks" 
                                     name= "remark" 
+
                                     id="fullWidth"
                                     onChange={customerPaymentFormik.handleChange} 
                                     required/>
@@ -70,7 +86,7 @@ const CUstomerPayment = () => {
         </Wrapper>
     )
 }
-export default CUstomerPayment
+export default CustomerPayment
 
 const Wrapper = styled.div`
 `;

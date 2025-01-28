@@ -4,16 +4,16 @@ import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField
 import styled from "styled-components";
 
 
-const CUstomerPayment = () => {
+const CustomerPayment = () => {
      const customerPaymentFormik = useFormik({
             initialValues:{
                 paymentMode:"",
-                InstallmentNumber: "",
+                installmentNumber: "",
                 remark:"",
                 ammount:""
             },
             onSubmit:(details)=>{
-                console.log("loginDetails",details)
+                console.log("paymentDetailsInCUstomerComp",details)
             }
         })
     return(
@@ -37,7 +37,7 @@ const CUstomerPayment = () => {
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
-                                name= "InstallmentNumber" 
+                                name= "installmentNumber" 
                                 label="Installment number"
                                 onChange={customerPaymentFormik.handleChange}
                                 required>
@@ -70,7 +70,7 @@ const CUstomerPayment = () => {
         </Wrapper>
     )
 }
-export default CUstomerPayment
+export default CustomerPayment
 
 const Wrapper = styled.div`
 `;

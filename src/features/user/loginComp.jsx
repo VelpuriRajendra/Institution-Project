@@ -1,24 +1,35 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
-import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import { Box, Button, FormControl, Grid, InputLabel, MenuItem, OutlinedInput, Select, TextField } from "@mui/material";
 
 import { useFormik } from "formik";
 import {styled} from "styled-components"
 
 
-import { useRegisterToCunstomerMutation } from "../../services/registrationService.api";
-import { useAddCustomerDetailsMutation, useLazyGetloginQuery } from "../../services/signupService.api";
+import { useLazyGetThroughMobileNumberQuery } from "../../services/registrationService.api";
+import { useAddCustomerDetailsMutation, useLazyGetloginQuery } from "../../services/customerService.api";
 
 import { addLoggeduser } from "./loginSlice";
 import HomeNavComp from "../home/homeNavComp";
+import ConfirmModalBox from "./confirmModalBox";
+
+
+
+
 
 const LoginComp = () => {
     const [fun] = useLazyGetloginQuery()
-    const [regToCustFun] = useRegisterToCunstomerMutation()
     const [addCustomer] = useAddCustomerDetailsMutation()
+    const [getViaMobileNumber] = useLazyGetThroughMobileNumberQuery()
     const dispatch = useDispatch()
     const navigate = useNavigate()
+
+        const [modalBoxFlag, setModalBoxFlag] = useState(false)
+
+    const {loggedUser} = useSelector(state => state.loginRed)
+    console.log("loginCompLoggedUser",loggedUser)
     const userFormik = useFormik({
         initialValues:{
             mobileNumber:"",
@@ -26,19 +37,19 @@ const LoginComp = () => {
             role:""
         },
         onSubmit:(loginDetails)=>{
-            console.log("loginDetails",loginDetails)
             fun(loginDetails)
-            .then(res=>{if(res.data.length === 0){
+            .then(res=>{if(res?.data?.length === 0){
                 console.log("res",res.data[0])
+                setModalBoxFlag(true)
             }else{
-                dispatch(addLoggeduser(res.data[0]))
-                console.log("res",res.data[0])
                 if(res.data[0].role === "Admin"){
                     navigate("/adminDashboard")
                 }
                 else{
-                    regToCustFun(res.data[0].mobileNumber)
-                    .then(res=>addCustomer(res.data[0]))
+                    console.log("resLoggedDetails",res.data[0])
+                    getViaMobileNumber(res?.data[0]?.mobileNumber)
+                    .then(res=>addCustomer(res?.data[0]))
+                    dispatch(addLoggeduser(res?.data[0]))
                     navigate("/customerDashboard")
                 }
             }}) 
@@ -89,6 +100,12 @@ const LoginComp = () => {
                     
                 </Grid>
             </Grid>
+            {modalBoxFlag && <ConfirmModalBox flag = {modalBoxFlag} 
+                                                            Smessage = {"Registered Issue"} 
+                                                            Rmessage = {"Please Register to login"}
+                                                            linkTO = "/registration"
+                                                            cancelBtn = "cancel"
+                                                            btnName= "Registration Page"/>}
         </Wrapper>
     )
 }

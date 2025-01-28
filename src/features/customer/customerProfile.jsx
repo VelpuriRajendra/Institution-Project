@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography';
 
 export default function CustomerProfile() {
   const {loggedUser} = useSelector(state=>state.loginRed)
+  // console.log("loggedUser",loggedUser)
   return (
     <Wrapper>
        { loggedUser.map((details)=>{

@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const signupApi = createApi({
+const customerApi = createApi({
     reducerPath:"signupReducer",
     baseQuery: fetchBaseQuery({baseUrl:"http://localhost:4000/customers"}),
     endpoints:(builde)=>({
@@ -23,12 +23,20 @@ const signupApi = createApi({
                 method:"PATCH",
                 body:customerDetails
             })
+        }) ,
+        updatePayment:builde.mutation({
+            query:({paymentDetails, id})=>({
+                url:"/"+id,
+                method:"PATCH",
+                body:paymentDetails
+            })
         })  
     })
 })
 export const {useAddRegisterToCustomerMutation, 
+                useUpdatePaymentMutation,
                 useAddCustomerDetailsMutation,
                 useGetSignupQuery,
                 useLazyGetSignupQuery,
-                useLazyGetloginQuery} = signupApi
-export default signupApi
+                useLazyGetloginQuery} = customerApi
+export default customerApi

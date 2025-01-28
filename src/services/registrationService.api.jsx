@@ -7,6 +7,9 @@ const registrationApi = createApi({
         getRegistersDetails:builde.query({
             query:()=>("/")
         }),
+        getThroughMobileNumber:builde.query({
+            query:(data)=>(`/?mobileNumber=${data}`)
+        }),
         addRegisterDetails:builde.mutation({
             query:(val)=>({
                 url:"/",
@@ -16,14 +19,16 @@ const registrationApi = createApi({
         }),
         registerToCunstomer:builde.mutation({
             query:(customerDetails)=>({
-                url:`/?mobileNumber=${customerDetails}`,
+                url:`/?mobileNumber=${customerDetails.mobileNumber}`,
                 method:"GET"
             })
         })
     })
 
 })
-export const {useGetRegistersDetailsQuery, 
+export const {useGetRegistersDetailsQuery,
+                useGetThroughMobileNumberQuery,
+                useLazyGetThroughMobileNumberQuery,
                 useAddRegisterDetailsMutation, 
                 useLazyGetRegistersDetailsQuery,
                 useRegisterToCunstomerMutation} = registrationApi

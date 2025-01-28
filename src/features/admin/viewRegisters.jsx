@@ -16,7 +16,7 @@ const ViewRegisters = () => {
     return(
         <Wrapper>
             <h1>
-            View Customers
+            View Registers
             </h1>
             {data?.map((details)=>{
                return <Wrapper>

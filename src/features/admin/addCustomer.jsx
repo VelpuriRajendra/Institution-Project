@@ -5,19 +5,18 @@ import { useFormik } from "formik";
 
 import { Box, Button, Grid, TextField } from "@mui/material";
 
-import { useAddRegisterDetailsMutation,
-        useLazyGetRegistersDetailsQuery} from "../../services/registrationService.api";
-import { useAddRegisterToCustomerMutation } from "../../services/signupService.api";
+import { useAddRegisterToCustomerMutation } from "../../services/customerService.api";
 
 import ConfirmModalBox from "../user/confirmModalBox";
 
 const AddCustomer = () => {
+        const successMessage = `Congratulations Your Details Submittted To Our Portal`
+    const registrationMessage = `Registration Completed`
+
     const [addCustomerFun] = useAddRegisterToCustomerMutation()
 
     const [modalBoxFlag, setModalBoxFlag] = useState(false)
 
-    const successMessage = `Congratulations Your Details Submittted To Our Portal`
-    const registrationMessage = `Registration Completed`
 
     const registrationFormik = useFormik({
         initialValues:{

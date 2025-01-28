@@ -6,10 +6,11 @@ import {styled} from "styled-components"
 import { useFormik } from "formik";
 
 import { useRegisterToCunstomerMutation } from "../../services/registrationService.api";
-import { useAddCustomerDetailsMutation, useAddRegisterToCustomerMutation } from "../../services/signupService.api";
+import { useAddRegisterToCustomerMutation } from "../../services/customerService.api";
 
 import HomeNavComp from "../home/homeNavComp";
 import ConfirmModalBox from "./confirmModalBox";
+import { useSelector } from "react-redux";
 
 const SignupComp = () => {
     const [findingSignupInRegister] = useRegisterToCunstomerMutation()
@@ -21,18 +22,25 @@ const SignupComp = () => {
     const successMessage = `Congratulations Your Details Submittted To Our Signup Portal`
     const registrationMessage = `Signup Completed`
 
+    const {loggedUser} = useSelector(state=>state.loginRed)
+    console.log("signupCompLoggedUser", loggedUser)
+
     const signupFormik = useFormik({
         initialValues:{
             mobileNumber:"",
             password:"",
             cnfmPassword:"",
-            category:"Customer"
+            role:"Customer",
+            initialPayment:"",
+            firstInstallment:"",
+            secondInstallment:""
         },
         onSubmit:(signupDetails)=>{
             const {password, cnfmPassword} = signupDetails
             if(password === cnfmPassword){
                 findingSignupInRegister(signupDetails)
                 .then(res=>{if(res.data.length === 0){
+                    
                 }else{
                     createPassword(signupDetails)
                     setModalBoxFlag(true)
