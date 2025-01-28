@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Box, Button, FormControl, Grid, InputLabel, MenuItem, OutlinedInput, Select, TextField } from "@mui/material";
 
@@ -23,13 +23,28 @@ const LoginComp = () => {
     const [fun] = useLazyGetloginQuery()
     const [addCustomer] = useAddCustomerDetailsMutation()
     const [getViaMobileNumber] = useLazyGetThroughMobileNumberQuery()
+
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-        const [modalBoxFlag, setModalBoxFlag] = useState(false)
+    const [modalBoxFlag, setModalBoxFlag] = useState(false)
 
     const {loggedUser} = useSelector(state => state.loginRed)
     console.log("loginCompLoggedUser",loggedUser)
+
+    const sessionDetails = JSON.parse(window.localStorage.getItem("loggedData"))
+    console.log(sessionDetails)
+    // useEffect(()=>{
+    //     sessionDetails?.forEach((val)=>{
+    //         if(val.role === "Admin"){
+    //             navigate("/adminDashboard")
+    //         }
+    //         else{
+    //             navigate("/customerDashboard")
+    //         }
+    //     }, [])
+    // })
+
     const userFormik = useFormik({
         initialValues:{
             mobileNumber:"",
@@ -42,11 +57,16 @@ const LoginComp = () => {
                 console.log("res",res.data[0])
                 setModalBoxFlag(true)
             }else{
+                console.log("res",res.data[0])
+                const dd = [res.data[0]]
                 if(res.data[0].role === "Admin"){
+                    window.localStorage.setItem("loggedData", JSON.stringify(dd));
+                    dispatch(addLoggeduser(res?.data[0]))
                     navigate("/adminDashboard")
                 }
                 else{
                     console.log("resLoggedDetails",res.data[0])
+                    window.localStorage.setItem("loggedData", JSON.stringify(dd));
                     getViaMobileNumber(res?.data[0]?.mobileNumber)
                     .then(res=>addCustomer(res?.data[0]))
                     dispatch(addLoggeduser(res?.data[0]))

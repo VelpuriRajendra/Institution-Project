@@ -15,7 +15,8 @@ export default function CustomerProfile() {
 
   return (
     <Wrapper>
-       { loggedUser.map((details)=>{
+      <Heading1>Admin Profile</Heading1>
+       { loggedUser?.map((details)=>{
         return <Wrapper>
             <Card sx={{ maxWidth: 345 }}>
               <CardMedia
@@ -46,4 +47,6 @@ export default function CustomerProfile() {
 }
 
 const Wrapper = styled.div`
+`;
+const Heading1 = styled.h1`
 `;

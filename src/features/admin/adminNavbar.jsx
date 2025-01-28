@@ -42,6 +42,7 @@ export default function AdminNavComp() {
     navigate("addCustomer")
   };
   const handleLogout = () => {
+    window.localStorage.clear()
     dispatch(clearLoggedData())
     navigate("/")
   };

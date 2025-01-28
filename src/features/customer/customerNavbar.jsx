@@ -9,6 +9,7 @@ import Menu from '@mui/material/Menu';
 
 import * as React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import styled from 'styled-components';
 
@@ -19,6 +20,7 @@ export default function CustomerNavComp() {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -36,7 +38,8 @@ export default function CustomerNavComp() {
     navigate("paymentDetails")
   };
   const handleLogout = () => {
-    clearLoggedData()
+    window.localStorage.clear()
+    dispatch(clearLoggedData())
     navigate("/")
   }
 
